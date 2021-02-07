@@ -1,6 +1,7 @@
 import click
 import pathlib
 import os
+from dat.errors.dat_exception import DatException
 
 
 @click.group()
