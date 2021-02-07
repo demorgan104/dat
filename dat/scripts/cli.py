@@ -1,4 +1,7 @@
 import click
+import pathlib
+import os
+
 
 @click.group()
 def cli():
@@ -15,6 +18,31 @@ def build(variant):
 @click.option('--release-type')
 def release(release_type):
     click.echo('Releasing %s' % release_type)
+
+@cli.command()
+@click.option('-d', '--dest', default=os.getcwd())
+@click.option('-n', '--name')
+def new(dest, name):
+    template_elems = [
+        'conf',
+        'doc',
+        'metrics',
+        'src',
+        'tests'
+    ]
+    if dest:
+        if not os.path.exists(dest):
+            raise DatException(
+            'Destination {} doesn\'t exist'.format(
+                dest
+            )
+        )
+
+    for elem in template_elems:
+        path = os.path.join(dest, elem)
+        os.mkdir(path)
+        
+
 
 
     

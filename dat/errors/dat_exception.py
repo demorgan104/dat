@@ -1,0 +1,2 @@
+class DatException(Exception):
+    pass
