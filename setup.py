@@ -8,7 +8,7 @@ setup(
     version="0.0.1",
     author="demorgan104",
     author_email="timotei@tutanota.de",
-    description="The best friend of C/C++ developers",
+    description="Package generator for C/C++ projects.",
     long_description=long_description,
     long_description_content_type="text/markdown",
     url="https://github.com/demorgan104/dat",

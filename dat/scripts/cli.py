@@ -3,6 +3,7 @@ import pathlib
 import os
 import subprocess
 from dat.errors.dat_exception import DatException
+from dat.api.build_api import BuildApi
 
 
 @click.group()
@@ -14,20 +15,8 @@ def cli():
 @click.option('--variant')
 def build(variant):
     click.echo('Building variant %s' % variant)
-    subprocess.run(
-        ["conan", "install", "-if", "dat_build", "."]
-    )
-    subprocess.run(
-        [
-            "conan",
-            "build",
-            "-bf",
-            "dat_build",
-            "-if",
-            "dat_build",
-            "."
-        ]
-    )
+    build_api = BuildApi()
+    build_api.build(variant)
 
 
 @cli.command()
