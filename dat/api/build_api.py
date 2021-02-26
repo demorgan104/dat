@@ -20,7 +20,7 @@ class BuildApi(object):
             '_dat_build'
         )
         generate_conanfile(
-            self.current_dir
+            self.current_dir, config
         )
         os.chdir(
             '_dat_build'

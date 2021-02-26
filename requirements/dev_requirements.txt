@@ -4,3 +4,4 @@ conan==1.33.1
 wheel==0.36.2
 Scons==4.1.0
 pyyaml
+yapf
