@@ -31,9 +31,9 @@ class <$name>Conan(ConanFile):
         
 
     def package(self):
-        self.copy("*.h", dst="include", src="src")
-        self.copy("*.a", dst="lib", keep_path=False)
-        self.copy(".*", dst="bin", src="bin")
+        for elem in os.listdir("."):
+            if os.path.isdir(elem):
+                self.copy("*", dst=os.path.dirname(elem))
 
     def package_info(self):
         self.cpp_info.libs = ["hello"]

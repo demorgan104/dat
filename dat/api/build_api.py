@@ -20,7 +20,8 @@ class BuildApi(object):
             '_dat_build'
         )
         generate_conanfile(
-            self.current_dir, config
+            self.current_dir,
+            config
         )
         os.chdir(
             '_dat_build'
@@ -43,6 +44,18 @@ class BuildApi(object):
                 "-if",
                 ".",
                 "."
+            ]
+        )
+        subprocess.run(
+            [
+                "conan",
+                "export-pkg",
+                ".",
+                "{name}/{version}".format(
+                    name=config['name'],
+                    version=config['version']
+                ),
+                "-f"
             ]
         )
 
