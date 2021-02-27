@@ -51,7 +51,7 @@ class BuildApi(object):
                 "conan",
                 "export-pkg",
                 ".",
-                "{name}/{version}".format(
+                "{name}/{version}@user/stable".format(
                     name=config['name'],
                     version=config['version']
                 ),
