@@ -1,4 +1,4 @@
-# dat
+# DAT
 
 ![logo](logos/dat_logo.png)
 
@@ -8,7 +8,7 @@ Just start writing your source code afterwards. The package infrastructure will 
 
 
 
-DAT Repositories
+# DAT Repositories
 
 NAME|DESCRIPTION|LINK
 ----|-----------|----
