@@ -6,6 +6,22 @@ Generate ready to use C/C++ packages.
 
 Just start writing your source code afterwards. The package infrastructure will already be ready for you.
 
+# Getting started
+
+## Install DAT in your python environment
+
+
+## Using DAT
+
+DAT Commands
+
+NAME|DESCRIPTION
+----|-----------
+dat new|Create a new ready to use package
+dat build|Build a package
+dat release|Release a package
+
+
 
 
 # DAT Repositories
