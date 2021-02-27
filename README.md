@@ -12,13 +12,16 @@ Just start writing your source code afterwards. The package infrastructure will 
 
     Clone DAT:
         git clone https://github.com/demorgan104/dat
+        
     Create a python virtual environment:
         python -m venv ./venv
+        
     Activate the virtual environment
         Windows: 
           venv/Source/activate
         Macos: 
           source venv/bin/activate
+          
     Install DAT:
         python setup.py install
 
