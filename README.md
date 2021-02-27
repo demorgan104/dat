@@ -10,20 +10,20 @@ Just start writing your source code afterwards. The package infrastructure will 
 
 ## Install DAT in your python environment
 
-- Clone DAT:
-    git clone https://github.com/demorgan104/dat
-- Create a python virtual environment:
-    python -m venv ./venv
-- Activate the virtual environment
-    Windows: 
-      venv/Source/activate
-    Macos: 
-      source venv/bin/activate
-- Install DAT:
-    python setup.py install
-  
-- Test the setup:
-    dat -h
+    - Clone DAT:
+        git clone https://github.com/demorgan104/dat
+    - Create a python virtual environment:
+        python -m venv ./venv
+    - Activate the virtual environment
+        Windows: 
+          venv/Source/activate
+        Macos: 
+          source venv/bin/activate
+    - Install DAT:
+        python setup.py install
+
+    - Test the setup:
+        dat -h
 
 ## Using DAT
 
