@@ -4,6 +4,7 @@ import os
 import subprocess
 from dat.errors.dat_exception import DatException
 from dat.api.build_api import BuildApi
+from dat.api.release_api import ReleaseApi
 
 
 @click.group()
@@ -23,6 +24,9 @@ def build(variant):
 @click.option('--release-type')
 def release(release_type):
     click.echo('Releasing %s' % release_type)
+    release_api = ReleaseApi()
+    release_api.release()
+    
 
 @cli.command()
 @click.option('-d', '--dest', default=os.getcwd())
