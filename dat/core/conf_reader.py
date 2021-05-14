@@ -4,7 +4,7 @@ from dat.errors.dat_exception import DatException
 
 
 def get_package_config(package_location):
-    conf_file = os.path.join(package_location, 'conf', 'build.yml')
+    conf_file = os.path.join(package_location, 'conf', 'package.yml')
 
     with open(conf_file, 'r') as yaml_stream:
         try:

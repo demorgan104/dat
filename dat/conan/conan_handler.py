@@ -6,11 +6,11 @@ def generate_conanfile(dst, config):
     replacements = {
         'name': config['name'],
         'description': config['description'],
-        'url': config['url']
+        'url': config['url'],
+        'version': config['version']
     }
     new_conan_file = os.path.join(
         dst,
-        '_dat_build',
         'conanfile.py'
     )
     conan_file_template = os.path.join(
@@ -30,7 +30,8 @@ def generate_conanfile(dst, config):
                     new_line = line.replace(
                         '<${token}>'.format(
                             token=token
-                        ), replacements[token]
+                        ), str(replacements[token])
                     )
                 new_conan_recipe.write(new_line)
+    return new_conan_file
 
