@@ -12,15 +12,21 @@ class <$name>Conan(ConanFile):
     description = "<$description>"
     topics = ("<Put some tag here>", "<here>", "<and here>")
     settings = "os"
+    requires = <$requirements>
 
 
     def source(self):
         self.run("git clone <$url>")
 
+    def requirements(self):
+        pass
 
     def build(self):
         conan_dir = os.getcwd()
         print('building package in directory {}'.format(conan_dir))
+        #print('rootpath: {}'.format(
+        #    self.deps_cpp_info['hello_test'].rootpath
+        #))
         with open('<$name>.txt', 'w') as file:
             file.write(
                 'This is the package binary produced by {}'.format(self.name)
@@ -40,23 +46,23 @@ class <$name>Conan(ConanFile):
         """
             Info about this package that will be used by its consumers should be added here
         """
-        self.cpp_info.name = "<PKG_NAME>"
-        self.cpp_info.names["generator_name"] = "<PKG_NAME>"
-        self.cpp_info.includedirs = ['include']  # Ordered list of include paths
-        self.cpp_info.libs = []  # The libs to link against
-        self.cpp_info.system_libs = []  # System libs to link against
-        self.cpp_info.libdirs = ['lib']  # Directories where libraries can be found
-        self.cpp_info.resdirs = ['res']  # Directories where resources, data, etc. can be found
-        self.cpp_info.bindirs = ['bin']  # Directories where executables and shared libs can be found
-        self.cpp_info.srcdirs = []  # Directories where sources can be found (debugging, reusing sources)
-        self.cpp_info.build_modules = {}  # Build system utility module files
-        self.cpp_info.defines = []  # preprocessor definitions
-        self.cpp_info.cflags = []  # pure C flags
-        self.cpp_info.cxxflags = []  # C++ compilation flags
-        self.cpp_info.sharedlinkflags = []  # linker flags
-        self.cpp_info.exelinkflags = []  # linker flags
-        self.cpp_info.components  # Dictionary with the different components a package may have
-        self.cpp_info.requires = None  # List of components from requirements
+        self.cpp_info.name = "<$name>"
+        #self.cpp_info.names["generator_name"] = ""
+        #self.cpp_info.includedirs = ['include']  # Ordered list of include paths
+        #self.cpp_info.libs = []  # The libs to link against
+        #self.cpp_info.system_libs = []  # System libs to link against
+        #self.cpp_info.libdirs = ['lib']  # Directories where libraries can be found
+        #self.cpp_info.resdirs = ['res']  # Directories where resources, data, etc. can be found
+        #self.cpp_info.bindirs = ['bin']  # Directories where executables and shared libs can be found
+        #self.cpp_info.srcdirs = []  # Directories where sources can be found (debugging, reusing sources)
+        #self.cpp_info.build_modules = {}  # Build system utility module files
+        #self.cpp_info.defines = []  # preprocessor definitions
+        #self.cpp_info.cflags = []  # pure C flags
+        #self.cpp_info.cxxflags = []  # C++ compilation flags
+        #self.cpp_info.sharedlinkflags = []  # linker flags
+        #self.cpp_info.exelinkflags = []  # linker flags
+        #self.cpp_info.components  # Dictionary with the different components a package may have
+        #self.cpp_info.requires = None  # List of components from requirements
 
     def package(self):
         self.copy("*.txt", dst="bin", keep_path=False)

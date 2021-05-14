@@ -3,11 +3,27 @@ import re
 
 
 def generate_conanfile(dst, config):
+
+    requirements = ""
+    if 'depends' in config:
+        for package_name, version_entry in config['depends'].items():
+            package = "{package_name}/{version}@stable/release".format(
+                package_name = package_name,
+                version = str(version_entry['version'])
+            )
+            requirements += "\"{package}\",".format(
+                package = package
+            )
+        requirements = requirements[:-1] # remove the last , 
+    else:
+        requirements = "\"\""
+
     replacements = {
         'name': config['name'],
         'description': config['description'],
         'url': config['url'],
-        'version': config['version']
+        'version': config['version'],
+        'requirements': requirements
     }
     new_conan_file = os.path.join(
         dst,
