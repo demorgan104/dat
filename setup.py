@@ -19,13 +19,9 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    install_requires = [
-        'Click'
-    ],
+    install_requires=["Click"],
     entry_points={
-        'console_scripts': [
-            'dat=dat.scripts.cli:cli'
-        ],
+        "console_scripts": ["dat=dat.scripts.cli:cli"],
     },
-    python_requires='>=3.6',
+    python_requires=">=3.6",
 )
