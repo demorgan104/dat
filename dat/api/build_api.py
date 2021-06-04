@@ -1,3 +1,6 @@
+"""
+    TBD
+"""
 import os
 import subprocess
 import shutil
@@ -5,11 +8,20 @@ from dat.core.conf_reader import get_package_config
 from dat.conan.conan_handler import generate_conanfile
 
 
-class BuildApi(object):
+class BuildApi:
+    """
+    TBD
+    """
+
     def __init__(self):
         self.current_dir = os.getcwd()
 
-    def execute_conan_steps(self, dat_tmp, generated_conan_file, config):
+    # pylint: disable=R0914, W0613
+    @classmethod
+    def execute_conan_steps(cls, dat_tmp, generated_conan_file, config):
+        """
+        TBD
+        """
         dat_tmp_tmp = os.path.join(dat_tmp, "tmp")
         source_folder = os.path.join(dat_tmp_tmp, "source")
         install_folder = os.path.join(dat_tmp_tmp, "install")
@@ -25,12 +37,14 @@ class BuildApi(object):
         install_cmd = "conan install {conan_file} {install_folder_flag}".format(
             conan_file=generated_conan_file, install_folder_flag=install_folder_flag
         )
+        # pylint: disable=C0301
         build_cmd = "conan build {conan_file} {source_folder_flag} {install_folder_flag} {build_folder_flag}".format(
             conan_file=generated_conan_file,
             source_folder_flag=source_folder_flag,
             install_folder_flag=install_folder_flag,
             build_folder_flag=build_folder_flag,
         )
+        # pylint: disable=C0301
         package_cmd = "conan package {conan_file} {source_folder_flag} {install_folder_flag} {build_folder_flag} {package_folder_flag}".format(
             conan_file=generated_conan_file,
             source_folder_flag=source_folder_flag,
@@ -38,7 +52,7 @@ class BuildApi(object):
             build_folder_flag=build_folder_flag,
             package_folder_flag=package_folder_flag,
         )
-
+        # pylint: disable=C0301
         export_package_cmd = "conan export-pkg {conan_file} {pkg_id} {source_folder_flag} {install_folder_flag} {build_folder_flag} --force".format(
             conan_file=generated_conan_file,
             source_folder_flag=source_folder_flag,
@@ -51,14 +65,24 @@ class BuildApi(object):
 
         for cmd in cmd_flow:
             print('Executing cmd "{}"'.format(cmd))
-            subprocess.run(cmd.split(" "))
+            try:
+                subprocess.run(cmd.split(" "), check=True)
+            except subprocess.CalledProcessError:
+                print("Error executing {}".format(cmd))
 
-    def handle_tmp_folder(self, location):
+    @classmethod
+    def handle_tmp_folder(cls, location):
+        """
+        TBD
+        """
         if os.path.exists(location):
             shutil.rmtree(location)
         os.mkdir(location)
 
     def build(self, variant):
+        """
+        TBD
+        """
         print("current path: {}".format(__file__))
         print("current dir: {}".format(self.current_dir))
         config = get_package_config(os.getcwd())
@@ -66,10 +90,3 @@ class BuildApi(object):
         self.handle_tmp_folder(dat_tmp_folder)
         generated_conan_file = generate_conanfile(dat_tmp_folder, config)
         self.execute_conan_steps(dat_tmp_folder, generated_conan_file, config)
-
-    # Support with statement in the future
-    def __enter__(self):
-        pass
-
-    def __exit__(self):
-        pass

@@ -1,9 +1,15 @@
+"""
+    Configuration reader for DAT
+"""
 import os
 import yaml
 from dat.errors.dat_exception import DatException
 
 
 def get_package_config(package_location):
+    """
+    Create a config dict based on the package location
+    """
     conf_file = os.path.join(package_location, "conf", "package.yml")
 
     with open(conf_file, "r") as yaml_stream:
@@ -12,12 +18,13 @@ def get_package_config(package_location):
             config["package_path"] = package_location
             print("Loaded \n {}".format(config))
             return config
-        except yaml.scanner.ScannerError as e:
+        except yaml.scanner.ScannerError as scanner_error:
+            # pylint: disable=C0301
             raise DatException(
                 "Could not load the build configuration file. The following errors occured: \n{}\n Check your build file and try again !".format(
-                    str(e)
+                    str(scanner_error)
                 )
-            )
+            ) from scanner_error
 
 
 if __name__ == "__main__":

@@ -1,2 +1,9 @@
+"""
+    TBD
+"""
+
+
 class DatException(Exception):
-    pass
+    """
+    DAT Exception
+    """

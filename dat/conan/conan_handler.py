@@ -1,9 +1,15 @@
+"""
+    TBD
+"""
 import os
 import re
 import shutil
 
-
+# pylint: disable=R0914
 def generate_conanfile(dst, config):
+    """
+    TBD
+    """
     # Create the extensions folder
     package_path = config["package_path"]
     extensions_dir = os.path.join(package_path, "extensions")

@@ -1,14 +1,25 @@
+"""
+    TBD
+"""
 import os
 import subprocess
 from dat.core.conf_reader import get_package_config
 
+# pylint: disable=R0903
+class ReleaseApi:
+    """
+    TBD
+    """
 
-class ReleaseApi(object):
     def __init__(self) -> None:
         super().__init__()
         self.current_dir = os.getcwd()
 
-    def release(self):
+    @classmethod
+    def release(cls):
+        """
+        TBD
+        """
         config = get_package_config(os.getcwd())
 
         print("releasing package {}".format(config["name"]))
@@ -25,11 +36,14 @@ class ReleaseApi(object):
             )
         )
         try:
-            subprocess.run(conan_remote_url_cmd.split())
-        except:
+            subprocess.run(conan_remote_url_cmd.split(), check=True)
+        except subprocess.CalledProcessError:
             print("Conan remote URL already exists !")
 
         upload_cmd = "conan upload -r {remote_name} {package_id} --all".format(
             remote_name=remote_name, package_id=package_id
         )
-        subprocess.run(upload_cmd.split())
+        try:
+            subprocess.run(upload_cmd.split(), check=True)
+        except subprocess.CalledProcessError:
+            print("Error executing {}".format(upload_cmd))

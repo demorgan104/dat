@@ -1,7 +1,8 @@
-import click
-import pathlib
+"""
+    DAT Cli implementation using Click package
+"""
 import os
-import subprocess
+import click
 from dat.errors.dat_exception import DatException
 from dat.api.build_api import BuildApi
 from dat.api.release_api import ReleaseApi
@@ -9,12 +10,17 @@ from dat.api.release_api import ReleaseApi
 
 @click.group()
 def cli():
-    pass
+    """
+    TBD
+    """
 
 
 @cli.command()
 @click.option("--variant")
 def build(variant):
+    """
+    TBD
+    """
     click.echo("Building variant %s" % variant)
     build_api = BuildApi()
     build_api.build(variant)
@@ -23,6 +29,9 @@ def build(variant):
 @cli.command()
 @click.option("--release-type")
 def release(release_type):
+    """
+    TBD
+    """
     click.echo("Releasing %s" % release_type)
     release_api = ReleaseApi()
     release_api.release()
@@ -31,7 +40,11 @@ def release(release_type):
 @cli.command()
 @click.option("-d", "--dest", default=os.getcwd())
 @click.option("-n", "--name")
+# pylint: disable=W0613
 def new(dest, name):
+    """
+    TBD
+    """
     template_elems = ["conf", "doc", "metrics", "src", "tests"]
     if dest:
         if not os.path.exists(dest):
