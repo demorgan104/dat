@@ -8,17 +8,25 @@ def generate_conanfile(dst, config):
     package_path = config['package_path']
     extensions_dir = os.path.join(package_path, 'extensions')
     extensions_dst = os.path.join(dst, 'extensions')
+    # Copy default extensions
+    extensions_dir_local = os.path.join(os.path.dirname(__file__), 'extensions')
+    shutil.copytree(
+        extensions_dir_local,
+        extensions_dst
+    )
+    # Replace the default ones with the local ones if they exist
     if os.path.exists(extensions_dir):
-        shutil.copytree(
-            extensions_dir,
-            extensions_dst
-        )
-    else:
-        extensions_dir_local = os.path.join(os.path.dirname(__file__), 'extensions')
-        shutil.copytree(
-            extensions_dir_local,
-            extensions_dst
-        )
+        for file in os.listdir(extensions_dir):
+            extension_file_src = os.path.join(extensions_dir, file)
+            extension_file_dst = os.path.join(extensions_dst, file)
+            shutil.copyfile(
+                extension_file_src,
+                extension_file_dst
+            )
+    
+        
+
+    
     requirements = ""
     if 'depends' in config:
         for package_name, version_entry in config['depends'].items():
