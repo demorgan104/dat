@@ -1,5 +1,6 @@
 import os
 from conans import ConanFile, tools
+from extensions import build, package
 
 
 
@@ -22,6 +23,7 @@ class <$name>Conan(ConanFile):
         pass
 
     def build(self):
+        build.build_pre()
         conan_dir = os.getcwd()
         print('building package in directory {}'.format(conan_dir))
         #print('rootpath: {}'.format(
@@ -40,7 +42,7 @@ class <$name>Conan(ConanFile):
         #    # activate venv and run scons
         #    self.run("source ./venv/bin/activate")
         #    self.run("scons --build-workarea={}".format(conan_dir))
-    
+        build.build_post()
     
     def package_info(self):
         """
@@ -64,6 +66,11 @@ class <$name>Conan(ConanFile):
         #self.cpp_info.components  # Dictionary with the different components a package may have
         #self.cpp_info.requires = None  # List of components from requirements
 
+    def export(self):
+        self.copy("*.py", src="extensions", dst="extensions")
+
     def package(self):
-        self.copy("*.txt", dst="bin", keep_path=False)
+        package.package_pre()
+        self.copy("*.txt", dst="content", keep_path=False)
+        package.package_post()
 

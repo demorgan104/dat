@@ -9,6 +9,7 @@ def get_package_config(package_location):
     with open(conf_file, 'r') as yaml_stream:
         try:
             config = yaml.safe_load(yaml_stream)
+            config["package_path"] = package_location
             print("Loaded \n {}".format(config))
             return config
         except yaml.scanner.ScannerError as e:

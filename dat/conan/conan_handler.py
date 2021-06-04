@@ -1,9 +1,24 @@
 import os
 import re
+import shutil
 
 
 def generate_conanfile(dst, config):
-
+    # Create the extensions folder
+    package_path = config['package_path']
+    extensions_dir = os.path.join(package_path, 'extensions')
+    extensions_dst = os.path.join(dst, 'extensions')
+    if os.path.exists(extensions_dir):
+        shutil.copytree(
+            extensions_dir,
+            extensions_dst
+        )
+    else:
+        extensions_dir_local = os.path.join(os.path.dirname(__file__), 'extensions')
+        shutil.copytree(
+            extensions_dir_local,
+            extensions_dst
+        )
     requirements = ""
     if 'depends' in config:
         for package_name, version_entry in config['depends'].items():

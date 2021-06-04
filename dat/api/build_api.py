@@ -59,6 +59,7 @@ class BuildApi(object):
         ]
 
         for cmd in cmd_flow:
+            print('Executing cmd "{}"'.format(cmd))
             subprocess.run(
                 cmd.split(' ')
             )
