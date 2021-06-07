@@ -3,9 +3,9 @@
 """
 import os
 import click
-from dat.errors.dat_exception import DatException
 from dat.api.build_api import BuildApi
 from dat.api.release_api import ReleaseApi
+from dat.api.new_api import NewApi
 
 
 @click.group()
@@ -40,16 +40,16 @@ def release(release_type):
 @cli.command()
 @click.option("-d", "--dest", default=os.getcwd())
 @click.option("-n", "--name")
+@click.option("--force/--no-force", default=False)
 # pylint: disable=W0613
-def new(dest, name):
+def new(dest, name, force):
     """
     TBD
     """
-    template_elems = ["conf", "doc", "metrics", "src", "tests"]
-    if dest:
-        if not os.path.exists(dest):
-            raise DatException("Destination {} doesn't exist".format(dest))
-
-    for elem in template_elems:
-        path = os.path.join(dest, elem)
-        os.mkdir(path)
+    click.echo("Generating a new package... \n Location: {} \n Name: {}".format(
+        dest,
+        name
+    ))
+    new_api = NewApi()
+    new_api.new(dest, name, force)
+    
