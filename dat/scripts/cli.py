@@ -11,7 +11,7 @@ from dat.api.new_api import NewApi
 @click.group()
 def cli():
     """
-    TBD
+    Your C/C++ technology stack ready in one step
     """
 
 
@@ -19,7 +19,7 @@ def cli():
 @click.option("--variant")
 def build(variant):
     """
-    TBD
+    Build your package
     """
     click.echo("Building variant %s" % variant)
     build_api = BuildApi()
@@ -30,7 +30,7 @@ def build(variant):
 @click.option("--release-type")
 def release(release_type):
     """
-    TBD
+    Release a package that was already built
     """
     click.echo("Releasing %s" % release_type)
     release_api = ReleaseApi()
@@ -44,7 +44,7 @@ def release(release_type):
 # pylint: disable=W0613
 def new(dest, name, force):
     """
-    TBD
+    Generate a DAT package and start developing
     """
     click.echo(
         "Generating a new package... \n Location: {} \n Name: {}".format(dest, name)
