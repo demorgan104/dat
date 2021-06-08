@@ -9,3 +9,4 @@ yapf
 mkdocs
 mkdocs-material
 pytest
+pylint
