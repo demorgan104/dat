@@ -6,6 +6,7 @@ import subprocess
 import shutil
 from dat.core.conf_reader import get_package_config
 from dat.conan.conan_handler import generate_conanfile
+from dat.utils.dat_logger import app_logger
 
 
 class BuildApi:
@@ -64,11 +65,11 @@ class BuildApi:
         cmd_flow = [source_cmd, install_cmd, build_cmd, package_cmd, export_package_cmd]
 
         for cmd in cmd_flow:
-            print('Executing cmd "{}"'.format(cmd))
+            app_logger.debug('Executing cmd "{}"'.format(cmd))
             try:
                 subprocess.run(cmd.split(" "), check=True)
             except subprocess.CalledProcessError:
-                print("Error executing {}".format(cmd))
+                app_logger.error("Error executing {}".format(cmd), exc_info=True)
 
     @classmethod
     def handle_tmp_folder(cls, location):
@@ -83,8 +84,6 @@ class BuildApi:
         """
         TBD
         """
-        print("current path: {}".format(__file__))
-        print("current dir: {}".format(self.current_dir))
         config = get_package_config(os.getcwd())
         dat_tmp_folder = os.path.join(self.current_dir, "_dat_build")
         self.handle_tmp_folder(dat_tmp_folder)

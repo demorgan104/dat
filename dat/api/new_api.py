@@ -5,6 +5,7 @@ import os
 import shutil
 import yaml
 from dat.errors.dat_exception import DatException
+from dat.utils.dat_logger import app_logger
 
 
 class NewApi:
@@ -55,8 +56,8 @@ class NewApi:
                     content = self.replace_name_in_content(content, template_name)
                     file.write(content)
             except KeyError:
-                print(
-                    "Could not find {content_id}".format(content_id=content_identifier)
+                app_logger.error(
+                    "Could not find {content_id}".format(content_id=content_identifier), exc_info=True
                 )
                 open(os.path.join(root_dir, file_name), "w").close()
 
@@ -77,13 +78,13 @@ class NewApi:
         """
         TBD
         """
-        print("Generating a DAT package")
+        app_logger.info("Generating the package: \n Name: {} \n Location: {}".format(name, dest))
 
         template_file = os.path.join(
             os.path.dirname(__file__), "..", "templates", "basic.yml"
         )
         with open(template_file, "r") as input_stream:
-            print(
+            app_logger.info(
                 "Loading template descriptor {descriptor_location}".format(
                     descriptor_location=template_file
                 )
@@ -99,7 +100,7 @@ class NewApi:
             os.mkdir(root_dir)
         else:
             if forced:
-                print(
+                app_logger.warn(
                     "Removing directory {dir} because it already exists !".format(
                         dir=root_dir
                     )
@@ -117,6 +118,6 @@ class NewApi:
             {key: value for key, value in descriptor_content.items() if key != "root"},
             name,
         )
-        print("Package generated at {destination}".format(destination=root_dir))
+        app_logger.info("Package generated at {destination}".format(destination=root_dir))
         if "description" in descriptor_content:
-            print(descriptor_content["description"])
+            app_logger.info(descriptor_content["description"])

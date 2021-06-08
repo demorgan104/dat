@@ -4,6 +4,7 @@
 import os
 import yaml
 from dat.errors.dat_exception import DatException
+from dat.utils.dat_logger import app_logger
 
 
 def get_package_config(package_location):
@@ -16,7 +17,7 @@ def get_package_config(package_location):
         try:
             config = yaml.safe_load(yaml_stream)
             config["package_path"] = package_location
-            print("Loaded \n {}".format(config))
+            app_logger.info("Loaded \n {}".format(config))
             return config
         except yaml.scanner.ScannerError as scanner_error:
             # pylint: disable=C0301
@@ -25,8 +26,3 @@ def get_package_config(package_location):
                     str(scanner_error)
                 )
             ) from scanner_error
-
-
-if __name__ == "__main__":
-    print("Loading yaml file")
-    get_package_config("/Users/timo/swd/packages_project/hello/")
