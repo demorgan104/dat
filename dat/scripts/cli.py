@@ -49,7 +49,7 @@ def new(dest, name, force):
     Generate a DAT package and start developing
     """
     app_logger.info(
-        "Generating a new package... \n Location: %s \n Name: %s", dest, name
+        "Generating a new package..."
     )
     new_api = NewApi()
     new_api.new(dest, name, force)
