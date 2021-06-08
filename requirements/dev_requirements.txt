@@ -1,7 +1,10 @@
-setuptools==52.0.0
-click==7.1.2
-conan==1.33.1
-wheel==0.36.2
-Scons==4.1.0
+setuptools
+click
+conan
+wheel
+Scons
+black
 pyyaml
 yapf
+mkdocs
+mkdocs-material
