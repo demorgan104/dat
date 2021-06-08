@@ -2,7 +2,6 @@
     TBD
 """
 import os
-import re
 import shutil
 from dat.utils import replacements
 

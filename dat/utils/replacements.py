@@ -4,12 +4,12 @@
 
 import re
 
+
 def replace_and_create(replacements, template, dst):
     """
-        TBD
+    TBD
     """
-    
-    
+
     pattern = re.compile(r"<\$(.*)>")
     with open(template, "r") as template_file:
         with open(dst, "w") as new_file:

@@ -46,10 +46,8 @@ def new(dest, name, force):
     """
     TBD
     """
-    click.echo("Generating a new package... \n Location: {} \n Name: {}".format(
-        dest,
-        name
-    ))
+    click.echo(
+        "Generating a new package... \n Location: {} \n Name: {}".format(dest, name)
+    )
     new_api = NewApi()
     new_api.new(dest, name, force)
-    
