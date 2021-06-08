@@ -1,0 +1,101 @@
+name: <${TEMPLATE_NAME}>
+description: This is the basic template for package generation
+
+root:
+  conf: 
+    package.yml: 
+      - package_yml_content
+  src:
+  doc: 
+    docs: 
+      about:
+        about_this_package.md: 
+          - doc_about_package
+      getting-started:
+        getting_started.md:
+          - doc_getting_started
+      index.md:
+          - doc_index
+    mkdocs.yml: 
+      - doc_config
+  extensions:
+    build.py: 
+      - extensions_build
+  tests: 
+  README.md:
+    - Readme_content
+
+package_yml_content: |
+  # Package info section
+  name: <${TEMPLATE_NAME}>
+  description: This is the <${TEMPLATE_NAME}> package implementation
+  url: <$url>
+  version: 0.1
+
+  # Package variants section
+
+  variants:     
+              
+      variant_1:
+          platform:
+              - clang
+
+
+doc_about_package: |
+  # Info about this package
+  
+  This is a short description of the package.
+
+
+doc_getting_started: |
+  # How to start with this package
+
+  Describe here what is your package doing.
+
+
+doc_index: |
+  # <${TEMPLATE_NAME}> Package
+
+  This is where you should write your documentation.
+
+
+doc_config: |
+  theme:
+  name: material
+  palette:
+    # Dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: black
+      accent: black
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+    # Light mode (to enable this when the feature is released)
+    - scheme: default
+      primary: blue grey
+      accent: blue grey
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+  site_name: Hello Package Documentation
+  site_url: https://www.github.com
+  nav:
+    - Home: index.md
+    - About this package: 
+        - 'Purpose': 'about/about_this_package.md' 
+    - Getting Started: 
+        - 'How to use this package ?': 'getting-started/getting_started.md'
+      
+extensions_build: |
+  def build_pre():
+    print("Calling custom build pre")
+
+  def build_post():
+    print("Calling custom build post")
+  
+Readme_content: |
+  This is the readme file of <${TEMPLATE_NAME}> package.
+  Add here important information about your package like:
+  - What it does ?
+  - How to use it ?
