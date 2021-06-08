@@ -19,10 +19,10 @@ class ReleaseApi:
     @classmethod
     def release(cls):
         """
-            TBD
+        TBD
         """
         config = get_package_config(os.getcwd())
-        app_logger.info("Releasing package {} ...".format(config["name"]))
+        app_logger.info("Releasing package %s ...", config["name"])
         package_id = "{name}/{version}@stable/release".format(
             name=config["name"], version=config["version"]
         )
@@ -46,4 +46,4 @@ class ReleaseApi:
         try:
             subprocess.run(upload_cmd.split(), check=True)
         except subprocess.CalledProcessError:
-            app_logger.error("Error executing {}".format(upload_cmd), exc_info=True)
+            app_logger.error("Error executing %s", upload_cmd, exc_info=True)

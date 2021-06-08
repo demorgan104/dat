@@ -2,7 +2,6 @@
     DAT Cli implementation using Click package
 """
 import os
-import logging
 import click
 from dat.api.build_api import BuildApi
 from dat.api.release_api import ReleaseApi
@@ -10,13 +9,12 @@ from dat.api.new_api import NewApi
 from dat.utils.dat_logger import app_logger
 
 
-
 @click.group()
 def cli():
     """
     Your C/C++ technology stack ready in one step
     """
-    #create_logger()
+    # create_logger()
 
 
 @cli.command()
@@ -25,7 +23,7 @@ def build(variant):
     """
     Build your package
     """
-    app_logger.info("Building variant %s" % variant)
+    app_logger.info("Building variant %s", variant)
     build_api = BuildApi()
     build_api.build(variant)
 
@@ -36,7 +34,7 @@ def release(release_type):
     """
     Release a package that was already built
     """
-    app_logger.info("Releasing %s" % release_type)
+    app_logger.info("Releasing %s", release_type)
     release_api = ReleaseApi()
     release_api.release()
 
@@ -51,7 +49,7 @@ def new(dest, name, force):
     Generate a DAT package and start developing
     """
     app_logger.info(
-        "Generating a new package... \n Location: {} \n Name: {}".format(dest, name)
+        "Generating a new package... \n Location: %s \n Name: %s", dest, name
     )
     new_api = NewApi()
     new_api.new(dest, name, force)

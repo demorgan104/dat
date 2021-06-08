@@ -65,11 +65,11 @@ class BuildApi:
         cmd_flow = [source_cmd, install_cmd, build_cmd, package_cmd, export_package_cmd]
 
         for cmd in cmd_flow:
-            app_logger.debug('Executing cmd "{}"'.format(cmd))
+            app_logger.debug('Executing cmd "%s"', cmd)
             try:
                 subprocess.run(cmd.split(" "), check=True)
             except subprocess.CalledProcessError:
-                app_logger.error("Error executing {}".format(cmd), exc_info=True)
+                app_logger.error("Error executing %s", cmd, exc_info=True)
 
     @classmethod
     def handle_tmp_folder(cls, location):

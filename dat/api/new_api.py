@@ -10,15 +10,16 @@ from dat.utils.dat_logger import app_logger
 
 class NewApi:
     """
-        TBD
+    TBD
     """
+
     def __init__(self) -> None:
         pass
 
     @staticmethod
     def replace_name_in_content(content, name):
         """
-            TBD
+        TBD
         """
         return content.replace("<${TEMPLATE_NAME}>", name)
 
@@ -35,12 +36,12 @@ class NewApi:
             return False
         return "None" in value or isinstance(value, list)
 
-    #pylint: disable=R0913
+    # pylint: disable=R0913
     def generate_file(
         self, file_name, content_identifier, root_dir, tags, template_name
     ):
         """
-            TBD
+        TBD
         """
         if content_identifier == "None":
             open(os.path.join(root_dir, file_name), "w").close()
@@ -57,13 +58,15 @@ class NewApi:
                     file.write(content)
             except KeyError:
                 app_logger.error(
-                    "Could not find {content_id}".format(content_id=content_identifier), exc_info=True
+                    "Could not find %s",
+                    content_identifier,
+                    exc_info=True,
                 )
                 open(os.path.join(root_dir, file_name), "w").close()
 
     def generate_structure(self, config, root_dir, tags, template_name):
         """
-            TBD
+        TBD
         """
         for key, value in config.items():
             if self.is_file_entry(value):
@@ -78,17 +81,15 @@ class NewApi:
         """
         TBD
         """
-        app_logger.info("Generating the package: \n Name: {} \n Location: {}".format(name, dest))
+        app_logger.info(
+            "Generating the package: \n Name: %s \n Location: %s", name, dest
+        )
 
         template_file = os.path.join(
             os.path.dirname(__file__), "..", "templates", "basic.yml"
         )
         with open(template_file, "r") as input_stream:
-            app_logger.info(
-                "Loading template descriptor {descriptor_location}".format(
-                    descriptor_location=template_file
-                )
-            )
+            app_logger.info("Loading template descriptor %s", template_file)
             descriptor_content = yaml.safe_load(input_stream)
 
         if not name:
@@ -100,10 +101,8 @@ class NewApi:
             os.mkdir(root_dir)
         else:
             if forced:
-                app_logger.warn(
-                    "Removing directory {dir} because it already exists !".format(
-                        dir=root_dir
-                    )
+                app_logger.warning(
+                    "Removing directory %s because it already exists !", root_dir
                 )
                 shutil.rmtree(root_dir)
                 os.mkdir(root_dir)
@@ -118,6 +117,6 @@ class NewApi:
             {key: value for key, value in descriptor_content.items() if key != "root"},
             name,
         )
-        app_logger.info("Package generated at {destination}".format(destination=root_dir))
+        app_logger.info("Package generated at %s", root_dir)
         if "description" in descriptor_content:
             app_logger.info(descriptor_content["description"])

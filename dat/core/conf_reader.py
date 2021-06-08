@@ -17,7 +17,7 @@ def get_package_config(package_location):
         try:
             config = yaml.safe_load(yaml_stream)
             config["package_path"] = package_location
-            app_logger.info("Loaded \n {}".format(config))
+            app_logger.info("Loaded \n %s", config)
             return config
         except yaml.scanner.ScannerError as scanner_error:
             # pylint: disable=C0301
