@@ -4,6 +4,7 @@
 import os
 import subprocess
 from dat.core.conf_reader import get_package_config
+from dat.utils.dat_logger import app_logger
 
 # pylint: disable=R0903
 class ReleaseApi:
@@ -21,8 +22,7 @@ class ReleaseApi:
         TBD
         """
         config = get_package_config(os.getcwd())
-
-        print("releasing package {}".format(config["name"]))
+        app_logger.info("Releasing package %s ...", config["name"])
         package_id = "{name}/{version}@stable/release".format(
             name=config["name"], version=config["version"]
         )
@@ -38,7 +38,7 @@ class ReleaseApi:
         try:
             subprocess.run(conan_remote_url_cmd.split(), check=True)
         except subprocess.CalledProcessError:
-            print("Conan remote URL already exists !")
+            app_logger.error("Conan remote URL already exists !", exc_info=True)
 
         upload_cmd = "conan upload -r {remote_name} {package_id} --all".format(
             remote_name=remote_name, package_id=package_id
@@ -46,4 +46,4 @@ class ReleaseApi:
         try:
             subprocess.run(upload_cmd.split(), check=True)
         except subprocess.CalledProcessError:
-            print("Error executing {}".format(upload_cmd))
+            app_logger.error("Error executing %s", upload_cmd, exc_info=True)
