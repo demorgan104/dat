@@ -1,4 +1,4 @@
-setuptools==52.0.0
+setuptools
 click==7.1.2
 conan==1.33.1
 wheel==0.36.2
