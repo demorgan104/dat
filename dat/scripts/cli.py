@@ -6,6 +6,7 @@ import click
 from dat.api.build_api import BuildApi
 from dat.api.release_api import ReleaseApi
 from dat.api.new_api import NewApi
+from dat.api.test_api import TestApi
 from dat.utils.dat_logger import app_logger
 
 
@@ -53,3 +54,9 @@ def new(dest, name, force):
     )
     new_api = NewApi()
     new_api.new(dest, name, force)
+
+
+@cli.command()
+def test():
+    test_api = TestApi()
+    test_api.test()
