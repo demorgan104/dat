@@ -16,6 +16,9 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip --requirement requirements/dev_requirements.txt
+    - name: Formatting with Black
+      run: |
+        black dat
     - name: Analysing the code with pylint
       run: |
         pylint dat

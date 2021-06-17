@@ -3,10 +3,10 @@
 """
 import os
 import subprocess
-import shutil
 from dat.core.conf_reader import get_package_config
 from dat.conan.conan_handler import generate_conanfile
 from dat.utils.dat_logger import app_logger
+from dat.utils import utils
 
 
 class BuildApi:
@@ -71,21 +71,12 @@ class BuildApi:
             except subprocess.CalledProcessError:
                 app_logger.error("Error executing %s", cmd, exc_info=True)
 
-    @classmethod
-    def handle_tmp_folder(cls, location):
-        """
-        TBD
-        """
-        if os.path.exists(location):
-            shutil.rmtree(location)
-        os.mkdir(location)
-
     def build(self, variant):
         """
         TBD
         """
         config = get_package_config(os.getcwd())
         dat_tmp_folder = os.path.join(self.current_dir, "_dat_build")
-        self.handle_tmp_folder(dat_tmp_folder)
+        utils.handle_tmp_folder(dat_tmp_folder)
         generated_conan_file = generate_conanfile(dat_tmp_folder, config)
         self.execute_conan_steps(dat_tmp_folder, generated_conan_file, config)
