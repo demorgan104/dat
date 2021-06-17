@@ -37,6 +37,7 @@ NAME|DESCRIPTION
 dat new|Create a new ready to use package
 dat build|Build a package
 dat release|Release a package
+dat test|Test your package 
 
 
 
