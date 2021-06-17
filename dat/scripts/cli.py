@@ -13,7 +13,7 @@ from dat.utils.dat_logger import app_logger
 @click.group()
 def cli():
     """
-    Your C/C++ technology stack ready in one step
+    Your C/C++ technology stack ready in one second
     """
     # create_logger()
 
@@ -56,5 +56,8 @@ def new(dest, name, force):
 
 @cli.command()
 def test():
+    """
+    Test your package
+    """
     test_api = TestApi()
     test_api.test()
