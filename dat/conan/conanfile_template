@@ -25,7 +25,7 @@ class <$name>Conan(ConanFile):
     def build(self):
         build.build_pre()
         conan_dir = os.getcwd()
-        print('building package in directory {}'.format(conan_dir))
+        self.output.info('building package in directory {}'.format(conan_dir))
         #print('rootpath: {}'.format(
         #    self.deps_cpp_info['hello_test'].rootpath
         #))
