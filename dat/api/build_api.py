@@ -18,17 +18,18 @@ class BuildApi:
         self.current_dir = os.getcwd()
 
     # pylint: disable=R0914, W0613
-    @classmethod
-    def execute_conan_steps(cls, dat_tmp, generated_conan_file, config):
+    def execute_conan_steps(self, dat_tmp, generated_conan_file, config):
         """
         TBD
         """
         dat_tmp_tmp = os.path.join(dat_tmp, "tmp")
-        source_folder = os.path.join(dat_tmp_tmp, "source")
+        #source_folder = os.path.join(self.current_dir, "conf")
+        source_folder = os.path.join(dat_tmp, "source")
         install_folder = os.path.join(dat_tmp_tmp, "install")
         build_folder = os.path.join(dat_tmp_tmp, "build")
         package_folder = os.path.join(dat_tmp_tmp, "package")
         source_folder_flag = "--source-folder={}".format(source_folder)
+        source_folder_flag_package = "--source-folder={}".format(build_folder)
         install_folder_flag = "--install-folder={}".format(install_folder)
         build_folder_flag = "--build-folder={}".format(build_folder)
         package_folder_flag = "--package-folder={}".format(package_folder)
@@ -48,7 +49,7 @@ class BuildApi:
         # pylint: disable=C0301
         package_cmd = "conan package {conan_file} {source_folder_flag} {install_folder_flag} {build_folder_flag} {package_folder_flag}".format(
             conan_file=generated_conan_file,
-            source_folder_flag=source_folder_flag,
+            source_folder_flag=source_folder_flag_package,
             install_folder_flag=install_folder_flag,
             build_folder_flag=build_folder_flag,
             package_folder_flag=package_folder_flag,
@@ -56,13 +57,13 @@ class BuildApi:
         # pylint: disable=C0301
         export_package_cmd = "conan export-pkg {conan_file} {pkg_id} {source_folder_flag} {install_folder_flag} {build_folder_flag} --force".format(
             conan_file=generated_conan_file,
-            source_folder_flag=source_folder_flag,
+            source_folder_flag=source_folder_flag_package,
             install_folder_flag=install_folder_flag,
             build_folder_flag=build_folder_flag,
             pkg_id="stable/release",
         )
 
-        cmd_flow = [source_cmd, install_cmd, build_cmd, package_cmd, export_package_cmd]
+        cmd_flow = [install_cmd, build_cmd, package_cmd, export_package_cmd]
 
         for cmd in cmd_flow:
             app_logger.debug('Executing cmd "%s"', cmd)
