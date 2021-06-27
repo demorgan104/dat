@@ -18,12 +18,12 @@ class BuildApi:
         self.current_dir = os.getcwd()
 
     # pylint: disable=R0914, W0613
-    def execute_conan_steps(self, dat_tmp, generated_conan_file, config):
+    @classmethod
+    def execute_conan_steps(cls, dat_tmp, generated_conan_file, config):
         """
         TBD
         """
         dat_tmp_tmp = os.path.join(dat_tmp, "tmp")
-        #source_folder = os.path.join(self.current_dir, "conf")
         source_folder = os.path.join(dat_tmp, "source")
         install_folder = os.path.join(dat_tmp_tmp, "install")
         build_folder = os.path.join(dat_tmp_tmp, "build")
@@ -33,9 +33,6 @@ class BuildApi:
         install_folder_flag = "--install-folder={}".format(install_folder)
         build_folder_flag = "--build-folder={}".format(build_folder)
         package_folder_flag = "--package-folder={}".format(package_folder)
-        source_cmd = "conan source {conan_file} {source_folder_flag}".format(
-            conan_file=generated_conan_file, source_folder_flag=source_folder_flag
-        )
         install_cmd = "conan install {conan_file} {install_folder_flag}".format(
             conan_file=generated_conan_file, install_folder_flag=install_folder_flag
         )
