@@ -34,6 +34,14 @@ I will try to develop or integrate your requests :)
 
 Open an issue and I will help you !
 
+## Write your own templates and use them:
+
+`
+    dat new -n <package_name> -t <your_template_file> -d <destination>
+`
+
+Check https://github.com/demorgan104/dat-templates.git for samples.
+
 <br/>
 <br/>
 <br/>
@@ -89,6 +97,8 @@ Typical usage:
         dat test
     `
 
+    This test is for both testing that the package can be used by other packages and in the future to execute the unit tests.
+
 - Check the documentation:
 
     `
@@ -100,6 +110,22 @@ Typical usage:
     `
         dat run
     `
+
+- Releasing to artifactory:
+
+    For this you need to setup an artifactory server. You can use the following repo for the demo: https://github.com/demorgan104/dat-infrastructure
+
+    Clone this repo and navigate to artifactory directory. There you can run:
+        `
+            docker-compose up
+        `
+
+    DAT is for the moment configured to work with that and there is no portable configuration available. Feel free to open a pull request for that or modify the source code :)
+
+    Then you can use:
+        `
+            dat release
+        `
 
 
 <br/>
