@@ -10,8 +10,6 @@ from dat.api.test_api import TestApi
 from dat.api.document_api import DocumentApi
 from dat.api.run_api import RunApi
 from dat.utils.dat_logger import app_logger
-from dat.errors.dat_exception import DatException
-
 
 @click.group()
 def cli():

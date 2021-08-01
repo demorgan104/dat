@@ -2,9 +2,6 @@
     DAT package test API
 """
 import os
-import subprocess
-import webbrowser
-from dat.utils.dat_logger import app_logger
 from dat.errors.dat_exception import DatException
 
 
@@ -17,6 +14,7 @@ class RunApi:
     def __init__(self) -> None:
         self.current_dir = os.getcwd()
 
+    # pylint: disable=R1732,W0122
     def run(self):
         """
         Document api implementation
