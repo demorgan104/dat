@@ -44,6 +44,17 @@ root:
   README.md:
     - Readme_content
 
+main_content: |
+  #include "src/lib/hello_world.h"
+
+  using namespace std;
+
+  int main() {
+      cout << hello_world();
+      return 0;
+  }
+
+
 build_test_content: |
   cc_test(
     name = "tests",
@@ -79,7 +90,7 @@ extensions_run: |
 
   def run_app():
       print("Running my application ...")
-      run_cmd = ['bazel', 'run', '//src:hello_world']
+      run_cmd = ['bazel', 'run', '//src:main']
       subprocess.run(run_cmd)
 
   # Call the method, since DAT is only loading the file
@@ -178,7 +189,7 @@ extensions_build: |
     subprocess.run([
       "bazel",
       "build",
-      "//src:hello_world"
+      "//src:main"
     ])
     shutil.copytree(
       "../../../bazel-bin",
