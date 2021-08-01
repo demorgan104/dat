@@ -59,7 +59,7 @@ Check https://github.com/demorgan104/dat-templates.git for samples.
 
     Activate the virtual environment
         Windows:
-          venv/Source/activate
+          venv/Scripts/activate
         Macos:
           source venv/bin/activate
 
