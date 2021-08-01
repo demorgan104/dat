@@ -44,8 +44,7 @@ Check https://github.com/demorgan104/dat-templates.git for samples.
 
 <br/>
 <br/>
-<br/>
-<br/>
+
 
 # Getting started
 
@@ -101,7 +100,7 @@ Typical usage:
         dat test
     `
 
-    This test is for both testing that the package can be used by other packages and in the future to execute the unit tests.
+    This test is for both testing that the package can be used by other packages and executing the unit tests.
 
 - Check the documentation:
 
