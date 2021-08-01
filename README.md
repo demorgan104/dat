@@ -86,7 +86,7 @@ Typical usage:
         cd dat_hello
     `
 - Build your package:
-
+   This step requires the installation of Bazel: https://docs.bazel.build/versions/4.1.0/install.html
     `
         dat build
     `
