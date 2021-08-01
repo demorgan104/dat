@@ -85,7 +85,7 @@ class NewApi:
             "Generating the package: \n Name: %s \n Location: %s", name, dest
         )
         template_file = os.path.join(
-            os.path.dirname(__file__), "..", "templates", "basic.yml"
+            os.path.dirname(__file__), "..", "templates", "bazel_hello.yml"
         )
         if template:
             template_file = os.path.join(template)

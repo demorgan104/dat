@@ -7,6 +7,8 @@ from dat.api.build_api import BuildApi
 from dat.api.release_api import ReleaseApi
 from dat.api.new_api import NewApi
 from dat.api.test_api import TestApi
+from dat.api.document_api import DocumentApi
+from dat.api.run_api import RunApi
 from dat.utils.dat_logger import app_logger
 from dat.errors.dat_exception import DatException
 
@@ -66,9 +68,18 @@ def test():
 
 
 @cli.command()
-@click.option("--target_name")
 def run():
     """
     Run the executable of your package
     """
-    raise DatException("Not implemented at the moment !")
+    run_api = RunApi()
+    run_api.run()
+
+
+@cli.command()
+def document():
+    """
+    Document your package
+    """
+    document_api = DocumentApi()
+    document_api.document()
