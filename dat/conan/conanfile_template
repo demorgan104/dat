@@ -74,4 +74,3 @@ class <$name>Conan(ConanFile):
         print('current folder ' + os.getcwd())
         self.copy("*.txt", dst="content", keep_path=False)
         package.package_post()
-

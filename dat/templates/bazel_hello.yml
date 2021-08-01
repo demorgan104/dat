@@ -6,12 +6,17 @@ root:
     package.yml:
       - package_yml_content
   src:
+    lib:
+      BUILD:
+        - lib_build_content
+      hello_world.cpp:
+        - hello_world_src_content
+      hello_world.h:
+        - hello_world_header_content
     BUILD:
       - build_content
-    hello_world.cpp:
-      - hello_world_src_content
-    hello_world.h:
-      - hello_world_header_content
+    main.cpp:
+      - main_content
   doc:
     docs:
       about:
@@ -29,19 +34,80 @@ root:
       - extensions_build
     run.py:
       - extensions_run
+    test.py:
+      - extensions_test
   tests:
+    BUILD:
+      - build_test_content
+    test.cpp:
+      - test_file_content
   WORKSPACE:
     - workspace_content
   README.md:
     - Readme_content
 
 
+extensions_test: |
+  import subprocess
+
+  def test():
+      subprocess.run([
+          "bazel",
+          "test",
+          "--test_output=all",
+          "//tests:tests"
+      ])
+
+  # DAT will not call the method automatically, just load it
+  test()
+
+main_content: |
+  #include "src/lib/hello_world.h"
+
+  using namespace std;
+
+  int main() {
+      cout << hello_world();
+      return 0;
+  }
+
+
+build_test_content: |
+  cc_test(
+    name = "tests",
+    srcs = glob(["**/*.cpp"]),
+    deps = [
+        "//src/lib:hello_world_lib",
+        "@googletest//:gtest_main",
+    ],
+  )
+
+test_file_content: |
+  #include "gtest/gtest.h"
+  #include "src/lib/hello_world.h"
+
+  using namespace std;
+
+  TEST(HelloShould, ReturnHelloWorld){
+      string actual = hello_world();
+      string expected = "Hello World !";
+      EXPECT_EQ(expected, actual);
+  }
+
+lib_build_content: |
+  cc_library(
+    name = "hello_world_lib",
+    srcs = glob(["**/*.cpp"]),
+    hdrs = glob(["**/*.h"]),
+    visibility = ["//visibility:public"],
+  )
+
 extensions_run: |
   import subprocess
 
   def run_app():
       print("Running my application ...")
-      run_cmd = ['bazel', 'run', '//src:hello_world']
+      run_cmd = ['bazel', 'run', '//src:main']
       subprocess.run(run_cmd)
 
   # Call the method, since DAT is only loading the file
@@ -52,11 +118,21 @@ build_content: |
 
   # Use copts = ["-std=c++17"] for C++ 17
   cc_binary(
-      name = "hello_world",
-      srcs = ["hello_world.cpp", "hello_world.h"]
+      name = "main",
+      srcs = ["main.cpp"],
+      deps = ["//src/lib:hello_world_lib"],
+      visibility = ["//visibility:public"]
   )
+
 workspace_content: |
   # Bazel workspace file
+  load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+  http_archive(
+    name = "googletest",
+    urls = ["https://github.com/google/googletest/archive/609281088cfefc76f9d0ce82e1ff6c30cc3591e5.zip"],
+    strip_prefix = "googletest-609281088cfefc76f9d0ce82e1ff6c30cc3591e5",
+  )
 
 package_yml_content: |
   # Package info section
@@ -130,7 +206,7 @@ extensions_build: |
     subprocess.run([
       "bazel",
       "build",
-      "//src:hello_world"
+      "//src:main"
     ])
     shutil.copytree(
       "../../../bazel-bin",
@@ -150,12 +226,14 @@ Readme_content: |
 hello_world_src_content: |
   #include "hello_world.h"
 
-  using namespace std;
-
-  int main() {
-      cout << "Hello World";
-      return 0;
+  string hello_world() {
+      return "Hello World !";
   }
 
 hello_world_header_content: |
   #include <iostream>
+  #include <string>
+
+  using namespace std;
+
+  string hello_world();
