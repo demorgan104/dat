@@ -2,6 +2,8 @@
     DAT package test API
 """
 import os
+# pylint: disable=W0611
+import subprocess
 from dat.errors.dat_exception import DatException
 
 
