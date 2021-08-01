@@ -27,11 +27,25 @@ root:
   extensions:
     build.py:
       - extensions_build
+    run.py:
+      - extensions_run
   tests:
   WORKSPACE:
     - workspace_content
   README.md:
     - Readme_content
+
+
+extensions_run: |
+  import subprocess
+
+  def run_app():
+      print("Running my application ...")
+      run_cmd = ['bazel', 'run', '//src:hello_world']
+      subprocess.run(run_cmd)
+
+  # Call the method, since DAT is only loading the file
+  run_app()
 
 build_content: |
   load("@rules_cc//cc:defs.bzl", "cc_binary")
@@ -80,23 +94,23 @@ doc_index: |
 
 doc_config: |
   theme:
-  name: material
-  palette:
-    # Dark mode
-    - media: "(prefers-color-scheme: dark)"
-      scheme: slate
-      primary: black
-      accent: black
-      toggle:
-        icon: material/weather-night
-        name: Switch to dark mode
-    # Light mode (to enable this when the feature is released)
-    - scheme: default
-      primary: blue grey
-      accent: blue grey
-      toggle:
-        icon: material/weather-sunny
-        name: Switch to light mode
+    name: material
+    palette:
+      # Dark mode
+      - media: "(prefers-color-scheme: dark)"
+        scheme: slate
+        primary: black
+        accent: black
+        toggle:
+          icon: material/weather-night
+          name: Switch to dark mode
+      # Light mode (to enable this when the feature is released)
+      - scheme: default
+        primary: blue grey
+        accent: blue grey
+        toggle:
+          icon: material/weather-sunny
+          name: Switch to light mode
   site_name: Hello Package Documentation
   site_url: https://www.github.com
   nav:
