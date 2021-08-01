@@ -36,7 +36,7 @@ class NewApi:
             return False
         return "None" in value or isinstance(value, list)
 
-    # pylint: disable=R0913
+    # pylint: disable=R0913, R1732
     def generate_file(
         self, file_name, content_identifier, root_dir, tags, template_name
     ):

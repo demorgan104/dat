@@ -69,7 +69,7 @@ class BuildApi:
                 subprocess.run(cmd.split(" "), check=True)
             except subprocess.CalledProcessError as error:
                 app_logger.error("Error executing %s", cmd, exc_info=True)
-                raise DatException(error)
+                raise DatException(error) from error
 
     def build(self, variant):
         """
