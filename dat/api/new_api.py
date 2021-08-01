@@ -36,7 +36,7 @@ class NewApi:
             return False
         return "None" in value or isinstance(value, list)
 
-    # pylint: disable=R0913
+    # pylint: disable=R0913, R1732
     def generate_file(
         self, file_name, content_identifier, root_dir, tags, template_name
     ):
@@ -77,17 +77,21 @@ class NewApi:
                 if not value is None:
                     self.generate_structure(value, new_dir, tags, template_name)
 
-    def new(self, dest, name, forced=False):
+    def new(self, dest, name, template, forced=False):
         """
         TBD
         """
         app_logger.info(
             "Generating the package: \n Name: %s \n Location: %s", name, dest
         )
-
         template_file = os.path.join(
             os.path.dirname(__file__), "..", "templates", "basic.yml"
         )
+        if template:
+            template_file = os.path.join(template)
+
+        app_logger.info("Using the template file %s", template_file)
+
         with open(template_file, "r") as input_stream:
             app_logger.info("Loading template descriptor %s", template_file)
             descriptor_content = yaml.safe_load(input_stream)

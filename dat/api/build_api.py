@@ -7,6 +7,7 @@ from dat.core.conf_reader import get_package_config
 from dat.conan.conan_handler import generate_conanfile
 from dat.utils.dat_logger import app_logger
 from dat.utils import utils
+from dat.errors.dat_exception import DatException
 
 
 class BuildApi:
@@ -66,8 +67,9 @@ class BuildApi:
             app_logger.debug('Executing cmd "%s"', cmd)
             try:
                 subprocess.run(cmd.split(" "), check=True)
-            except subprocess.CalledProcessError:
+            except subprocess.CalledProcessError as error:
                 app_logger.error("Error executing %s", cmd, exc_info=True)
+                raise DatException(error) from error
 
     def build(self, variant):
         """

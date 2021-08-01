@@ -8,6 +8,7 @@ from dat.api.release_api import ReleaseApi
 from dat.api.new_api import NewApi
 from dat.api.test_api import TestApi
 from dat.utils.dat_logger import app_logger
+from dat.errors.dat_exception import DatException
 
 
 @click.group()
@@ -44,14 +45,15 @@ def release(release_type):
 @click.option("-d", "--dest", default=os.getcwd())
 @click.option("-n", "--name")
 @click.option("--force/--no-force", default=False)
+@click.option("-t", "--template", default=None)
 # pylint: disable=W0613
-def new(dest, name, force):
+def new(dest, name, template, force):
     """
     Generate a DAT package and start developing
     """
     app_logger.info("Generating a new package...")
     new_api = NewApi()
-    new_api.new(dest, name, force)
+    new_api.new(dest, name, template, force)
 
 
 @cli.command()
@@ -61,3 +63,12 @@ def test():
     """
     test_api = TestApi()
     test_api.test()
+
+
+@cli.command()
+@click.option("--target_name")
+def run():
+    """
+    Run the executable of your package
+    """
+    raise DatException("Not implemented at the moment !")
