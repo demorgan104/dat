@@ -53,6 +53,8 @@ Check https://github.com/demorgan104/dat-templates.git for samples.
 
     Clone DAT:
         git clone https://github.com/demorgan104/dat
+        
+    Make sure your Python version is 3.9.0
 
     Create a python virtual environment:
         python -m venv ./venv
@@ -86,7 +88,9 @@ Typical usage:
         cd dat_hello
     `
 - Build your package:
+   
    This step requires the installation of Bazel: https://docs.bazel.build/versions/4.1.0/install.html
+   
     `
         dat build
     `
