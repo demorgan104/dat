@@ -11,7 +11,7 @@ DAT is setting up the following for you:
 - a standard repository structure
 - the [Conan](https://conan.io/) package flow
 - use any build tool you want
-- the hello world package comes with a minimal Bazel build
+- the starter package generated with dat new contains a basic Bazel build with GTest integrated
 - release the package in [Artifactory](https://jfrog.com/artifactory/)
 - documentation with [Mkdocs](https://www.mkdocs.org/)
 - through extensions, testing and running your package (check the extensions folder)
