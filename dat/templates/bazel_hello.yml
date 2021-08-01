@@ -34,6 +34,8 @@ root:
       - extensions_build
     run.py:
       - extensions_run
+    test.py:
+      - extensions_test
   tests:
     BUILD:
       - build_test_content
@@ -43,6 +45,21 @@ root:
     - workspace_content
   README.md:
     - Readme_content
+
+
+extensions_test: |
+  import subprocess
+
+  def test():
+      subprocess.run([
+          "bazel",
+          "test",
+          "--test_output=all",
+          "//tests:tests"
+      ])
+
+  # DAT will not call the method automatically, just load it
+  test()
 
 main_content: |
   #include "src/lib/hello_world.h"

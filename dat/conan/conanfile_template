@@ -1,6 +1,6 @@
 import os
 from conans import ConanFile, tools
-from extensions import build, package
+from extensions import build, package, test
 
 
 

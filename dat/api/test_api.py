@@ -6,6 +6,7 @@ import subprocess
 from dat.core.conf_reader import get_package_config
 from dat.utils.dat_logger import app_logger
 from dat.utils import replacements, utils
+from dat.errors.dat_exception import DatException
 
 
 class TestApi:
@@ -49,3 +50,9 @@ class TestApi:
             app_logger.error("Error executing %s", cmd, exc_info=True)
 
         # Execute package unit/functional tests
+
+        extensions_dir = os.path.join(self.current_dir, 'extensions')
+        test_extensions = os.path.join(extensions_dir, "test.py")
+        if not os.path.exists(test_extensions):
+            raise DatException("You should place a test.py script inside extensions folder !")
+        exec(open(test_extensions).read())
