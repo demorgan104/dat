@@ -6,6 +6,8 @@ Prototyping or writting C/C++ source code ?
 
 Start with DAT and focus only on what matters: the source code.
 
+Hit the star button if you like the idea.
+
 DAT is setting up the following for you:
 
 - a standard repository structure
