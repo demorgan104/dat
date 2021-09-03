@@ -23,7 +23,7 @@ class <$name>Conan(ConanFile):
         pass
 
     def build(self):
-        build.build_pre()
+        build.build_pre(self)
         conan_dir = os.getcwd()
         self.output.info('building package in directory {}'.format(conan_dir))
         #print('rootpath: {}'.format(
@@ -42,7 +42,7 @@ class <$name>Conan(ConanFile):
         #    # activate venv and run scons
         #    self.run("source ./venv/bin/activate")
         #    self.run("scons --build-workarea={}".format(conan_dir))
-        build.build_post()
+        build.build_post(self)
     
     def package_info(self):
         """
@@ -70,7 +70,7 @@ class <$name>Conan(ConanFile):
         self.copy("*.py", src="extensions", dst="extensions")
 
     def package(self):
-        package.package_pre()
+        package.package_pre(self)
         print('current folder ' + os.getcwd())
         self.copy("*.txt", dst="content", keep_path=False)
-        package.package_post()
+        package.package_post(self)

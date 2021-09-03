@@ -11,6 +11,7 @@ from dat.api.document_api import DocumentApi
 from dat.api.run_api import RunApi
 from dat.utils.dat_logger import app_logger
 
+
 @click.group()
 def cli():
     """

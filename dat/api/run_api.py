@@ -2,6 +2,7 @@
     DAT package test API
 """
 import os
+
 # pylint: disable=W0611
 import subprocess
 from dat.errors.dat_exception import DatException
@@ -21,9 +22,11 @@ class RunApi:
         """
         Document api implementation
         """
-        extensions_dir = os.path.join(self.current_dir, 'extensions')
+        extensions_dir = os.path.join(self.current_dir, "extensions")
         run_extensions = os.path.join(extensions_dir, "run.py")
         if not os.path.exists(run_extensions):
-            raise DatException("You should place a run.py script inside extensions folder !")
+            raise DatException(
+                "You should place a run.py script inside extensions folder !"
+            )
         exec(open(run_extensions).read())
-        #run_app()
+        # run_app()

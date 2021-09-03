@@ -51,9 +51,11 @@ class TestApi:
 
         # Execute package unit/functional tests
 
-        extensions_dir = os.path.join(self.current_dir, 'extensions')
+        extensions_dir = os.path.join(self.current_dir, "extensions")
         test_extensions = os.path.join(extensions_dir, "test.py")
         if not os.path.exists(test_extensions):
-            raise DatException("You should place a test.py script inside extensions folder !")
-        #pylint: disable=W0122, R1732
+            raise DatException(
+                "You should place a test.py script inside extensions folder !"
+            )
+        # pylint: disable=W0122, R1732
         exec(open(test_extensions).read())

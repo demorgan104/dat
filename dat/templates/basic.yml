@@ -88,10 +88,10 @@ doc_config: |
         - 'How to use this package ?': 'getting-started/getting_started.md'
       
 extensions_build: |
-  def build_pre():
+  def build_pre(self):
     print("Calling custom build pre")
 
-  def build_post():
+  def build_post(self):
     print("Calling custom build post")
   
 Readme_content: |

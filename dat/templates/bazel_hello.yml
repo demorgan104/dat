@@ -197,13 +197,11 @@ doc_config: |
         - 'How to use this package ?': 'getting-started/getting_started.md'
 
 extensions_build: |
-
-  import subprocess
   import shutil
 
-  def build_pre():
+  def build_pre(self):
     print("Calling custom build pre")
-    subprocess.run([
+    self.run([
       "bazel",
       "build",
       "//src:main"
@@ -213,7 +211,7 @@ extensions_build: |
       "./bazel-bin"
     )
 
-  def build_post():
+  def build_post(self):
     print("Calling custom build post")
 
 Readme_content: |
