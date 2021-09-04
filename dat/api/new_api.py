@@ -117,7 +117,7 @@ class NewApi:
                 os.mkdir(root_dir)
             else:
                 app_logger.warning(
-                    "Non existent files will be generated from the template ! Ignoring existing files"
+                    "Only generating files that don't exist !"
                 )
 
         self.generate_structure(
