@@ -38,7 +38,7 @@ class NewApi:
 
     # pylint: disable=R0913, R1732
     def generate_file(
-        self, file_name, content_identifier, root_dir, tags, template_name
+        self, file_name, content_identifier, root_dir, tags, template_name, forced
     ):
         """
         TBD
@@ -51,11 +51,15 @@ class NewApi:
                 tag = next(iter(content_identifier))
                 content = tags[tag]
                 file_path = os.path.join(root_dir, file_name)
-                if os.path.exists(file_path):
+                if os.path.exists(file_path) and forced:
                     os.remove(file_path)
-                with open(file_path, "w") as file:
-                    content = self.replace_name_in_content(content, template_name)
-                    file.write(content)
+                    with open(file_path, "w") as file:
+                        content = self.replace_name_in_content(content, template_name)
+                        file.write(content)
+                elif not os.path.exists(file_path):
+                    with open(file_path, "w") as file:
+                        content = self.replace_name_in_content(content, template_name)
+                        file.write(content)
             except KeyError:
                 app_logger.error(
                     "Could not find %s",
@@ -64,18 +68,19 @@ class NewApi:
                 )
                 open(os.path.join(root_dir, file_name), "w").close()
 
-    def generate_structure(self, config, root_dir, tags, template_name):
+    def generate_structure(self, config, root_dir, tags, template_name, forced):
         """
         TBD
         """
         for key, value in config.items():
             if self.is_file_entry(value):
-                self.generate_file(key, value, root_dir, tags, template_name)
+                self.generate_file(key, value, root_dir, tags, template_name, forced)
             else:
                 new_dir = os.path.join(root_dir, key)
-                os.mkdir(new_dir)
+                if forced or not os.path.exists(new_dir):
+                    os.mkdir(new_dir)
                 if not value is None:
-                    self.generate_structure(value, new_dir, tags, template_name)
+                    self.generate_structure(value, new_dir, tags, template_name, forced)
 
     def new(self, dest, name, template, forced=False):
         """
@@ -111,8 +116,8 @@ class NewApi:
                 shutil.rmtree(root_dir)
                 os.mkdir(root_dir)
             else:
-                raise DatException(
-                    "The package you are trying to generate already exists !"
+                app_logger.warning(
+                    "Non existent files will be generated from the template ! Ignoring existing files"
                 )
 
         self.generate_structure(
@@ -120,6 +125,7 @@ class NewApi:
             root_dir,
             {key: value for key, value in descriptor_content.items() if key != "root"},
             name,
+            forced,
         )
         app_logger.info("Package generated at %s", root_dir)
         if "description" in descriptor_content:
