@@ -2,6 +2,8 @@
 
 Accelerate the development of your C/C++ project.
 
+Hit the start button for support. New features will be added.
+
 Generate your package:
 
 ![dat_new](img/dat_new.gif)
