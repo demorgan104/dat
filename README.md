@@ -2,7 +2,7 @@
 
 Accelerate the development of your C/C++ project.
 
-Hit the start button for support. New features will be added.
+Hit the star for support. New features will be added.
 
 Generate your package:
 
