@@ -1,8 +1,6 @@
-# DAT
+# Welcome to DAT !
 
-![logo](img/dat_logo.png)
-
-Accelerate your C/C++ development.
+Accelerate the development of your C/C++ project.
 
 Generate your package:
 
