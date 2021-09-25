@@ -1,12 +1,18 @@
 # DAT
 
-![logo](logos/dat_logo.png)
+![logo](img/dat_logo.png)
 
-Prototyping or writting C/C++ source code ?
+Accelerate your C/C++ development.
 
-Start with DAT and focus only on what matters: the source code.
+Generate your package:
 
-Hit the star button if you like the idea.
+![dat_new](img/dat_new.gif)
+
+Use it:
+
+![dat_flow](img/dat_flow.gif)
+
+
 
 DAT is setting up the following for you:
 
@@ -21,20 +27,6 @@ DAT is setting up the following for you:
 Create your own templates and generate your own packages using DAT.
 
 Although a work in progress, DAT provides already the basics to start using it and benefit from increased development efficiency.
-
-## Give feedback
-
-Is there something you like or maybe you don't ?
-
-Do you want to contribute ?
-
-Feel free to open issues and start contributing.
-
-I will try to develop or integrate your requests :)
-
-## Do you need help ?
-
-Open an issue and I will help you !
 
 ## Write your own templates and use them:
 
