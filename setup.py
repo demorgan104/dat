@@ -7,7 +7,7 @@ setup(
     name="dat",
     version="1.2.0",
     author="demorgan104",
-    author_email="honestertech@protonmail.ch",
+    author_email="honestertech@protonmail.com",
     description="Package generator for C/C++ projects.",
     long_description=long_description,
     long_description_content_type="text/markdown",
