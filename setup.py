@@ -4,8 +4,8 @@ with open("README.md", "r", encoding="utf-8") as fh:
     long_description = fh.read()
 
 setup(
-    name="dat",
-    version="1.2.0",
+    name="dat-build",
+    version="1.2.6",
     author="demorgan104",
     author_email="honestertech@protonmail.com",
     description="Package generator for C/C++ projects.",
@@ -19,7 +19,14 @@ setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    install_requires=["Click"],
+    install_requires=["setuptools",
+                        "click",
+                        "conan",
+                        "wheel",
+                        "pyyaml",
+                        "mkdocs",
+                        "mkdocs-material"
+    ],
     entry_points={
         "console_scripts": ["dat=dat.scripts.cli:cli"],
     },
