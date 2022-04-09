@@ -5,9 +5,9 @@ with open("README.md", "r", encoding="utf-8") as fh:
 
 setup(
     name="dat",
-    version="0.0.1",
+    version="1.2.0",
     author="demorgan104",
-    author_email="timotei@tutanota.de",
+    author_email="honestertech@protonmail.ch",
     description="Package generator for C/C++ projects.",
     long_description=long_description,
     long_description_content_type="text/markdown",
